@@ -1,0 +1,136 @@
+.mywork {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    margin: 80px 10%;
+}
+
+/* Grid layout for project cards */
+.mywork-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+/* Styling for project items */
+.work-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.work-item:hover {
+    transform: scale(1.05);
+}
+
+/* Project image */
+.work-image {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Description box (hidden initially) */
+.work-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Show description on hover */
+.work-item:hover .work-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Description text */
+.work-description h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.work-description p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* View Project button */
+.work-description a {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+    background: #ff00ff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.work-description a:hover {
+    background: #d400d4;
+}
+
+/* Show more button */
+.mywork-showmore {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50px;
+    border: 2px solid white;
+    padding: 20px 40px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: 0.6s;
+    cursor: pointer;
+}
+
+.mywork-showmore img {
+    width: 25px;
+}
+
+.mywork-showmore:hover {
+    gap: 30px;
+    transition: 0.6s;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .mywork {
+        gap: 50px;
+        margin: 50px 6%;
+        align-items: start;
+    }
+
+    .mywork-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .mywork-showmore {
+        padding: 15px 30px;
+        font-size: 16px;
+        margin: 10px auto;
+    }
+
+    .work-description p {
+        font-size: 12px;
+    }
+
+    .mywork-showmore:hover {
+        gap: 20px;
+    }
+}
