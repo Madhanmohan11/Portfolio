@@ -1,102 +1,97 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Loader = () => {
+  const [progress, setProgress] = useState(0);
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress >= 100) {
+          clearInterval(interval);
+          setLoadingComplete(true);
+          return 100;
+        }
+        return oldProgress + 1;
+      });
+    }, 80);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <StyledWrapper>
-      <div className="center-body">
-        <div className="loader-circle-9">
-          Loading
-          <span />
+      {loadingComplete ? (
+        <h1 className="welcome-text">Welcome...😉</h1>
+      ) : (
+        <div className="loader-wrapper">
+          <div className="loader" style={{ width: `${progress}%` }} />
+          <span className="progress">{progress}%</span>
         </div>
-      </div>
+      )}
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
-  .center-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: #262626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: black;
+
+  .loader-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
   }
 
-  .loader-circle-9 {
+  .loader {
+    height: 4.8px;
+    display: inline-block;
+    background: #54f98d;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+  }
+
+  .progress {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70px;
-    height: 70px;
-    background: transparent;
-    border: 3px solid #3c3c3c;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 70px;
-    font-family: sans-serif;
-    font-size: 12px;
-    color: #00eaff;
-    text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    right: 0;
+    top: -20px;
+    color: #54f98d;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
   }
 
-  .loader-circle-9:before {
-    content: "";
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    width: 100%;
-    height: 100%;
-    border: 3px solid transparent;
-    border-top: 3px solid #00eaff;
-    border-right: 3px solid #00eaff;
-    border-radius: 50%;
-    animation: animateC 2s linear infinite;
+  .welcome-text {
+    color:white;
+    font-size: 4rem;
+    font-family: Arial, sans-serif;
   }
 
-  .loader-circle-9 span {
-    display: block;
-    position: absolute;
-    top: calc(50% - 2px);
-    left: 50%;
-    width: 50%;
-    height: 4px;
-    background: transparent;
-    transform-origin: left;
-    animation: animate 2s linear infinite;
-  }
-
-  .loader-circle-9 span:before {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #00eaff;
-    top: -6px;
-    right: -8px;
-    box-shadow: 0 0 20px #00eaff;
-  }
-
-  @keyframes animateC {
-    0% {
-      transform: rotate(0deg);
+  @media (max-width: 768px) {
+    .progress {
+      font-size: 12px;
+      top: -15px;
     }
-    100% {
-      transform: rotate(360deg);
+    .welcome-text {
+      font-size: 2rem;
     }
   }
 
-  @keyframes animate {
-    0% {
-      transform: rotate(45deg);
+  @media (max-width: 480px) {
+    .loader-wrapper {
+      max-width: 300px;
     }
-    100% {
-      transform: rotate(405deg);
+    .progress {
+      font-size: 10px;
+      top: -12px;
     }
-  }`;
+    .welcome-text {
+      font-size: 2rem;
+    }
+  }
+`;
 
 export default Loader;
