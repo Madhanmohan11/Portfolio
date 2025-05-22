@@ -4,8 +4,17 @@ import project3_img from '../assets/imgs/project3.svg.png'
 import project4_img from '../assets/imgs/project4.svg.png'
 import project5_img from '../assets/imgs/project5.svg.png'
 import project6_img from '../assets/imgs/project6.svg.png'
+import project7_img from '../assets/imgs/intern-pho.png'
 
 const mywork_data = [
+    {
+    w_no: 7,
+    w_name: "Study Abroad Guidance Platform",
+    w_img: project7_img,
+    w_desc: "Developed during my internship at UNI BRITIND GLOBAL UK. This responsive platform helps students plan higher education abroad. Built with React.js and Firebase, featuring application tracking and university recommendations.",
+    w_link: "https://unibritend.vercel.app/"
+
+    },
     {
         w_no:1,
         w_name:"Online Food Ordering App",
