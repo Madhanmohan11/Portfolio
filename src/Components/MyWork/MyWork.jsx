@@ -32,10 +32,10 @@ const MyWork = () => {
           </div>
         ))}
       </div>
-      <div className="mywork-showmore">
+{/*       <div className="mywork-showmore">
         <p>Show More</p>
         <img src={arrow_icon} alt="Arrow Icon" />
-      </div>
+      </div> */}
     </div>
   );
 };
