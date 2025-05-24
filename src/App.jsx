@@ -16,7 +16,7 @@ const App = () => {
     // Simulate loading time
     setTimeout(() => {
       setLoading(false);
-    }, 9025); // 9 seconds delay before showing the website
+    }, 4025); // 4 seconds delay before showing the website
   }, []);
 
   return (
