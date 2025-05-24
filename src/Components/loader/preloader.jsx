@@ -1,97 +1,131 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Loader = () => {
-  const [progress, setProgress] = useState(0);
-  const [loadingComplete, setLoadingComplete] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress >= 100) {
-          clearInterval(interval);
-          setLoadingComplete(true);
-          return 100;
-        }
-        return oldProgress + 1;
-      });
-    }, 80);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <StyledWrapper>
-      {loadingComplete ? (
-        <h1 className="welcome-text">Welcome...😉</h1>
-      ) : (
-        <div className="loader-wrapper">
-          <div className="loader" style={{ width: `${progress}%` }} />
-          <span className="progress">{progress}%</span>
+      <div className="loader">
+        <p>L</p>
+        <p>O</p>
+        <p>A</p>
+        <p>D</p>
+        <p>I</p>
+        <p>N</p>
+        <p>G</p>
+        <div className="arrows">
+          <div className="arrowsup">
+            <div className="arrow1" />
+            <div className="arrow2" />
+          </div>
+          <div className="arrowsbottom">
+            <div className="arrow3" />
+            <div className="arrow4" />
+          </div>
         </div>
-      )}
+      </div>
     </StyledWrapper>
   );
-};
+}
 
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
-  background: black;
-
-  .loader-wrapper {
-    position: relative;
-    width: 90%;
-    max-width: 400px;
-  }
+  height: 100vh; /* Full height to center vertically */
+  // background-color: #000; /* Optional: helps visualize white loader */
 
   .loader {
-    height: 4.8px;
-    display: inline-block;
-    background: #54f98d;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
+    width: 12em;
+    height: 3em;
+    color: white;
+    font-weight: 300;
+    font-style: oblique;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .progress {
-    position: absolute;
-    right: 0;
-    top: -20px;
-    color: #54f98d;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
+  .loader p {
+    font-size: 1.5em;
   }
 
-  .welcome-text {
-    color:white;
-    font-size: 4rem;
-    font-family: Arial, sans-serif;
+  .arrows {
+    width: 1.75em;
+    height: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5em;
   }
 
-  @media (max-width: 768px) {
-    .progress {
-      font-size: 12px;
-      top: -15px;
+  .arrow1,
+  .arrow2,
+  .arrow3,
+  .arrow4 {
+    width: 0.75em;
+    height: 0.75em;
+    border: solid 0.05em transparent;
+  }
+
+  .arrowsup,
+  .arrowsbottom {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .arrow1 {
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%);
+    animation: whitechange 2s linear infinite;
+  }
+
+  .arrow2 {
+    clip-path: polygon(0% 0%, 0% 0%, 100% 100%, 0% 100%);
+    animation: whitechange 2s linear infinite 0.5s;
+  }
+
+  .arrow3 {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%);
+    animation: whitechange 2s linear infinite 1.5s;
+  }
+
+  .arrow4 {
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 100%);
+    animation: whitechange 2s linear infinite 1s;
+  }
+
+  .loader p:nth-child(1) { animation: changefont 2s linear infinite; }
+  .loader p:nth-child(2) { animation: changefont 2s linear infinite 0.1s; }
+  .loader p:nth-child(3) { animation: changefont 2s linear infinite 0.2s; }
+  .loader p:nth-child(4) { animation: changefont 2s linear infinite 0.3s; }
+  .loader p:nth-child(5) { animation: changefont 2s linear infinite 0.4s; }
+  .loader p:nth-child(6) { animation: changefont 2s linear infinite 0.5s; }
+  .loader p:nth-child(7) { animation: changefont 2s linear infinite 0.6s; }
+
+  @keyframes whitechange {
+    0%, 50%, 100% {
+      background-color: transparent;
+      box-shadow: none;
     }
-    .welcome-text {
-      font-size: 2rem;
+    25% {
+      background-color: white;
     }
   }
 
-  @media (max-width: 480px) {
-    .loader-wrapper {
-      max-width: 300px;
+  @keyframes changefont {
+    0%, 50%, 100% {
+      padding-bottom: 0em;
     }
-    .progress {
-      font-size: 10px;
-      top: -12px;
+    75% {
+      padding-bottom: 1em;
     }
-    .welcome-text {
-      font-size: 2rem;
+    100% {
+      color: #171030;
     }
   }
 `;
+
 
 export default Loader;
